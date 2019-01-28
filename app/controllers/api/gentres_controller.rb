@@ -1,5 +1,5 @@
 module Api
-  class GentresController < ApplicationController
+  class GentresController < ApiController
     before_action :set_gentre, only: [:show, :edit, :update, :destroy]
 
     # GET /gentres

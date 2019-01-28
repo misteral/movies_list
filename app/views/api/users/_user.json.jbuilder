@@ -1,2 +1,3 @@
-json.extract! user, :id, :username, :created_at, :updated_at
-json.url api_user_url(user, format: :json)
+json.extract! user, :id, :username
+json.created_at user.created_at.to_i
+json.updated_at user.updated_at.to_i
