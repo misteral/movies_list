@@ -6,6 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-gentres = %w[Action Adventure Animation Biography Comedy Crime Documentary Drama Fantasy History Horror Musical Mystery Romance Sci-Fi Thriller War Western]
+gentes = %w[Action Adventure Animation Biography Comedy Crime Documentary \
+            Drama Fantasy History Horror Musical Mystery Romance Sci-Fi \
+            Thriller War Western]
 
-Gentre.create(name: "Action")
+gentes.each do |gentre|
+  Gentre.create(name: gentre)
+end
