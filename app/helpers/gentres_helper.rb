@@ -1,0 +1,2 @@
+module GentresHelper
+end

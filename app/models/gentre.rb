@@ -1,0 +1,2 @@
+class Gentre < ApplicationRecord
+end
