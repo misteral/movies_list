@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
-  resources :users
-  resources :gentres
-  resources :movies
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  namespace :api, defaults: { format: :json } do
+    resources :users
+    resources :movies
+    resources :gentres
+  end
+
+  namespace :admin do
+    resources :users
+    resources :movies
+    resources :gentres
+  end
 end
