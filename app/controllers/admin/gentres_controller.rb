@@ -29,7 +29,7 @@ module Admin
 
       respond_to do |format|
         if @gentre.save
-          format.html { redirect_to @gentre, notice: 'Gentre was successfully created.' }
+          format.html { redirect_to [:admin, @gentre], notice: 'Gentre was successfully created.' }
           format.json { render :show, status: :created, location: @gentre }
         else
           format.html { render :new }
@@ -43,7 +43,7 @@ module Admin
     def update
       respond_to do |format|
         if @gentre.update(gentre_params)
-          format.html { redirect_to @gentre, notice: 'Gentre was successfully updated.' }
+          format.html { redirect_to [:admin, @gentre], notice: 'Gentre was successfully updated.' }
           format.json { render :show, status: :ok, location: @gentre }
         else
           format.html { render :edit }
@@ -57,7 +57,7 @@ module Admin
     def destroy
       @gentre.destroy
       respond_to do |format|
-        format.html { redirect_to gentres_url, notice: 'Gentre was successfully destroyed.' }
+        format.html { redirect_to admin_gentres_url, notice: 'Gentre was successfully destroyed.' }
         format.json { head :no_content }
       end
     end
