@@ -1,4 +1,3 @@
 class Gentre < ApplicationRecord
-  validates :name, length: { maximum: 80 }
-  has_many :gentres
+  has_and_belongs_to_many :movies
 end

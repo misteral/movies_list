@@ -16,6 +16,10 @@
     <%= form.text_field :name %>
   </div>
 
+  <div class="dropdown">
+    <%= form.select :gentre_ids, Gentre.all.collect {|x| [x.name, x.id]},{}, { multiple: true }%>
+  </div>
+
   <div class="field">
     <%= form.label :year %>
     <%= form.number_field :year %>

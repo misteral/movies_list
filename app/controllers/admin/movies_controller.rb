@@ -43,7 +43,7 @@ module Admin
     def update
       respond_to do |format|
         if @movie.update(movie_params)
-          format.html { redirect_to [:admin, @gentre], notice: 'Movie was successfully updated.' }
+          format.html { redirect_to [:admin, @movie], notice: 'Movie was successfully updated.' }
           format.json { render :show, status: :ok, location: @movie }
         else
           format.html { render :edit }
@@ -70,7 +70,13 @@ module Admin
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def movie_params
-        params.require(:movie).permit(:name, :year, :thumbnail, :director, :main_star, :description)
+        params.require(:movie).permit(:name,
+                                      :year,
+                                      :thumbnail,
+                                      :director,
+                                      :main_star,
+                                      :description,
+                                      gentre_ids: [])
       end
   end
 end
