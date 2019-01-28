@@ -21,7 +21,11 @@
       <tr>
         <td><%= movie.name %></td>
         <td><%= movie.year %></td>
-        <td><%= movie.thumbnail %></td>
+        <% if movie.thumbnail.attachment %>
+          <td><%= link_to movie.thumbnail.filename, rails_blob_path(movie.thumbnail, disposition: "attachment") %></td>
+        <% else  %>
+        <td> not present</td>
+        <% end %>
         <td><%= movie.director %></td>
         <td><%= movie.main_star %></td>
         <td><%= movie.description %></td>

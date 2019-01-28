@@ -12,7 +12,9 @@
 
 <p>
   <strong>Thumbnail:</strong>
-  <%= @movie.thumbnail %>
+  <% if @movie.thumbnail.attachment %>
+    <%= link_to @movie.thumbnail.filename, rails_blob_path(@movie.thumbnail, disposition: "attachment") %>
+  <% end %>
 </p>
 
 <p>

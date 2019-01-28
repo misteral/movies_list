@@ -63,20 +63,21 @@ module Admin
     end
 
     private
-      # Use callbacks to share common setup or constraints between actions.
-      def set_movie
-        @movie = Movie.find(params[:id])
-      end
 
-      # Never trust parameters from the scary internet, only allow the white list through.
-      def movie_params
-        params.require(:movie).permit(:name,
-                                      :year,
-                                      :thumbnail,
-                                      :director,
-                                      :main_star,
-                                      :description,
-                                      gentre_ids: [])
-      end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_movie
+      @movie = Movie.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def movie_params
+      params.require(:movie).permit(:name,
+                                    :year,
+                                    :thumbnail,
+                                    :director,
+                                    :main_star,
+                                    :description,
+                                    gentre_ids: [])
+    end
   end
 end
