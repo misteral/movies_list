@@ -1,11 +1,13 @@
 module Api
   class MoviesController < ApplicationController
-    before_action :set_movie, only: [:show, :edit, :update, :destroy]
-
+    before_action :set_movie, only: [:show, :edit, :update, :destroy, :favorite]
+    before_action :set_user
     # GET /movies
     # GET /movies.json
     def index
-      @movies = Movie.all
+      return @movies = Movie.all unless @user
+
+      @movies = @user.movies
     end
 
     # GET /movies/1
@@ -20,6 +22,11 @@ module Api
 
     # GET /movies/1/edit
     def edit
+    end
+
+    def favorite
+      @user.movies << @movie
+      @movies = @user.movies.uniq
     end
 
     # POST /movies
@@ -63,14 +70,21 @@ module Api
     end
 
     private
-      # Use callbacks to share common setup or constraints between actions.
-      def set_movie
-        @movie = Movie.find(params[:id])
-      end
 
-      # Never trust parameters from the scary internet, only allow the white list through.
-      def movie_params
-        params.require(:movie).permit(:name, :year, :thumbnail, :director, :main_star, :description)
-      end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_movie
+      @movie = Movie.find(params[:id] || params[:movie_id])
+    end
+
+    def set_user
+      return unless params[:user_id]
+
+      @user = User.find(params[:user_id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def movie_params
+      params.require(:movie).permit(:name, :year, :thumbnail, :director, :main_star, :description)
+    end
   end
 end

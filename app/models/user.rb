@@ -4,4 +4,5 @@ class User < ApplicationRecord
   validates :username, length: { maximum: 20 }
   validates :username, format: { with: /\A[_A-Za-z0-9]+\z/,
                                  message: 'only allows letters, number and underscore' }
+  has_and_belongs_to_many :movies
 end
