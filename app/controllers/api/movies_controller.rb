@@ -1,6 +1,6 @@
 module Api
   class MoviesController < ApplicationController
-    before_action :set_movie, only: [:show, :edit, :update, :destroy, :favorite]
+    before_action :set_movie, only: %i[show edit update destroy favorite unfavorite]
     before_action :set_user
     # GET /movies
     # GET /movies.json
@@ -25,8 +25,13 @@ module Api
     end
 
     def favorite
-      @user.movies << @movie
-      @movies = @user.movies.uniq
+      @user.movies << @movie unless @user.movies.include?(@movie)
+      @movies = @user.movies
+    end
+
+    def unfavorite
+      @user.movies = @user.movies - [@movie]
+      @movies = @user.movies
     end
 
     # POST /movies
