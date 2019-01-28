@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :users
+    resources :users do
+      resources :movies, only: [:index]
+    end
     resources :movies
     resources :gentres
   end

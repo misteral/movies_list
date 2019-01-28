@@ -1,11 +1,14 @@
 module Admin
   class MoviesController < ApplicationController
     before_action :set_movie, only: [:show, :edit, :update, :destroy]
+    before_action :set_user
 
     # GET /movies
     # GET /movies.json
     def index
-      @movies = Movie.all
+      return @movies = Movie.all unless @user
+
+      @movies = @user.movies
     end
 
     # GET /movies/1
@@ -67,6 +70,12 @@ module Admin
     # Use callbacks to share common setup or constraints between actions.
     def set_movie
       @movie = Movie.find(params[:id])
+    end
+
+    def set_user
+      return unless params[:user_id]
+
+      @user = User.find(params[:user_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

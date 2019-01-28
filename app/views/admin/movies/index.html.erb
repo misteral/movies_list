@@ -40,4 +40,6 @@
 
 <br>
 
-<%= link_to 'New Movie', new_admin_movie_path %>
+<% unless @user %>
+  <%= link_to 'New Movie', new_admin_movie_path %>
+<% end %>
