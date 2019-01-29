@@ -28,11 +28,11 @@ class Movie < ApplicationRecord
     return unless thumbnail.attached?
 
     metadata = ActiveStorage::Analyzer::ImageAnalyzer.new(thumbnail).metadata
-    if metadata[:width] != 1000
-      errors[:base] << 'Thumbnail file should be 1000px width.'
+    if metadata[:height] != 1000
+      errors[:base] << 'Thumbnail file should be 1000px height.'
     end
-    return if metadata[:height] >= 600 && metadata[:height] <= 800
+    return if metadata[:width] >= 600 && metadata[:width] <= 800
 
-    errors[:base] << 'Thumbnail file should be 600-800px height.'
+    errors[:base] << 'Thumbnail file should be 600-800px width.'
   end
 end
