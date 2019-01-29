@@ -2,36 +2,24 @@
 
 <h1>Movies</h1>
 
-<table>
+<table border="1">
+  <col width="150">
+  <col width="150">
   <thead>
     <tr>
       <th>Name</th>
       <th>Year</th>
-      <th>Thumbnail</th>
-      <th>Director</th>
-      <th>Main star</th>
-      <th>Description</th>
-      <th>Favorites count</th>
-      <th colspan="3"></th>
+      <th>Times Favorited</th>
+      <th colspan="1">Actions</th>
     </tr>
   </thead>
 
   <tbody>
     <% @movies.each do |movie| %>
       <tr>
-        <td><%= movie.name %></td>
+        <td><%= link_to movie.name, edit_admin_movie_path(movie) %></td>
         <td><%= movie.year %></td>
-        <% if movie.thumbnail.attachment %>
-          <td><%= link_to movie.thumbnail.filename, rails_blob_path(movie.thumbnail, disposition: "attachment") %></td>
-        <% else  %>
-        <td> not present</td>
-        <% end %>
-        <td><%= movie.director %></td>
-        <td><%= movie.main_star %></td>
-        <td><%= movie.description %></td>
         <td><%= movie.favorites_count %></td>
-        <td><%= link_to 'Show', admin_movie_path(movie) %></td>
-        <td><%= link_to 'Edit', edit_admin_movie_path(movie) %></td>
         <td><%= link_to 'Destroy', admin_movie_path(movie), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

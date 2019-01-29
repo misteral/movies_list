@@ -22,12 +22,19 @@
 
   <div class="field">
     <%= form.label :year %>
-    <%= form.number_field :year %>
+
+    <%= form.select :year, (Time.zone.now.year - 100)..(Time.zone.now.year)  %>
   </div>
 
   <div class="field">
     <%= form.label :thumbnail %>
-    <%= form.file_field :thumbnail %>
+    <% if movie.thumbnail.attachment %>
+      Download current: <%= link_to movie.thumbnail.filename, rails_blob_path(movie.thumbnail, disposition: "attachment") %></br>
+    <% end  %>
+  </br>
+    Update:
+    <%= form.file_field :thumbnail, accept:'image/*' %>
+    Only PNG, JPEG and JPG images 1000 pixels tall and between 600 and 800 pixels wide. 1MB max.
   </div>
 
   <div class="field">
@@ -42,7 +49,7 @@
 
   <div class="field">
     <%= form.label :description %>
-    <%= form.text_field :description %>
+    <%= form.text_area :description %>
   </div>
 
   <div class="actions">

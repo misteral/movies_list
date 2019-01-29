@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   namespace :api, defaults: { format: :json } do
     resources :users do
       resources :movies do
@@ -11,6 +12,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    root to: 'movies#index'
     resources :users do
       resources :movies, only: [:index]
     end

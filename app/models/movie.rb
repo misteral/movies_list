@@ -6,11 +6,33 @@ class Movie < ApplicationRecord
   validates :description, length: { maximum: 400 }
 
   validates :name, :gentres, :year, presence: true
+  validate :thumbnail_image_valid_by_filesize?
+  validate :thumbnail_image_valid_by_imagesize?
   has_and_belongs_to_many :gentres
   has_and_belongs_to_many :users
   has_one_attached :thumbnail
 
   def favorites_count
     users.count
+  end
+
+  def thumbnail_image_valid_by_filesize?
+    return unless thumbnail.attached?
+
+    if thumbnail.blob.byte_size > 1_000_000
+      errors[:base] << 'Thumbnail file too big. More than 1Mb'
+    end
+  end
+
+  def thumbnail_image_valid_by_imagesize?
+    return unless thumbnail.attached?
+
+    metadata = ActiveStorage::Analyzer::ImageAnalyzer.new(thumbnail).metadata
+    if metadata[:width] != 1000
+      errors[:base] << 'Thumbnail file should be 1000px width.'
+    end
+    return if metadata[:height] >= 600 && metadata[:height] <= 800
+
+    errors[:base] << 'Thumbnail file should be 600-800px height.'
   end
 end

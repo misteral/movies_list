@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>MoviesList</title>
+    <title>Movies List</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,8 @@
   </head>
 
   <body>
+    <%= link_to 'Movies', admin_movies_path %>
+    <%= link_to 'Users', admin_users_path %>
     <%= yield %>
   </body>
 </html>
